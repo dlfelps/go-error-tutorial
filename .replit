@@ -1,0 +1,63 @@
+modules = ["golang", "go"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "GolangErrorHandlingDemo"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "go_error_handling_demo"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "GoErrorCLI"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "GoErrorDemo"
+
+[[workflows.workflow]]
+name = "GolangErrorHandlingDemo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go mod init error-handling-demo && go get github.com/sirupsen/logrus github.com/pkg/errors github.com/mattn/go-sqlite3 && go run main.go"
+
+[[workflows.workflow]]
+name = "go_error_handling_demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run main.go"
+
+[[workflows.workflow]]
+name = "GoErrorCLI"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd error-handling-cli && go run main.go"
+
+[[workflows.workflow]]
+name = "GoErrorDemo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd error-demo && go run main.go"
+
+[deployment]
+run = ["sh", "-c", "go mod init error-handling-demo && go get github.com/sirupsen/logrus github.com/pkg/errors github.com/mattn/go-sqlite3 && go run main.go"]
