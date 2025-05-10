@@ -67,7 +67,7 @@ func createErrors() {
 
         // Using fmt.Errorf
         fmt.Println("\n2. Using fmt.Errorf (allows formatting):")
-        fmt.Println("   Code: err := fmt.Errorf(\"error with value: %%d\", 42)")
+        fmt.Println("   Code: err := fmt.Errorf(`error with value: %d`, 42)")
         err2 := fmt.Errorf("error with value: %d", 42)
         fmt.Printf("   Result: %v\n", err2)
 
@@ -120,7 +120,7 @@ func customErrorTypes() {
         fmt.Println("    Message string")
         fmt.Println("}")
         fmt.Println("func (e ValidationError) Error() string {")
-        fmt.Println("    return fmt.Sprintf(\"validation failed for field '%%s': %%s\", e.Field, e.Message)")
+        fmt.Println("    return fmt.Sprintf(`validation failed for field '%s': %s`, e.Field, e.Message)")
         fmt.Println("}")
 
         fmt.Println("\nUsing the custom error type:")
@@ -195,7 +195,7 @@ func errorWrapping() {
         fmt.Println("\nError wrapping pattern:")
         fmt.Println("err := someFunction()")
         fmt.Println("if err != nil {")
-        fmt.Println("    return fmt.Errorf(\"context info: %w\", err)")
+        fmt.Println("    return fmt.Errorf(\"context info: %%w\", err)")
         fmt.Println("}")
 
         fmt.Println("\nChecking for specific errors in the chain:")
@@ -245,7 +245,7 @@ func panicAndRecovery() {
         fmt.Println("defer func() {")
         fmt.Println("    if r := recover(); r != nil {")
         fmt.Println("        // Handle panic")
-        fmt.Println("        err = fmt.Errorf(\"panic occurred: %%v\", r)")
+        fmt.Println("        err = fmt.Errorf(`panic occurred: %v`, r)")
         fmt.Println("    }")
         fmt.Println("}()")
 

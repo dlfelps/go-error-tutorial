@@ -1,0 +1,5 @@
+{
+  "database_path": ":memory:",
+  "log_level": "info",
+  "api_timeout": 30
+}
