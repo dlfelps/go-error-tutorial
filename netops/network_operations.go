@@ -26,7 +26,7 @@ func FetchWithRetry(ctx context.Context, url string, maxRetries int) ([]byte, er
 		resp, err := http.DefaultClient.Do(req)
 		if err != nil {
 			lastErr = errors.Wrapf(err, "attempt %d: request failed", attempt)
-			
+
 			// Check if the context has been cancelled before retrying
 			select {
 			case <-ctx.Done():
@@ -48,7 +48,7 @@ func FetchWithRetry(ctx context.Context, url string, maxRetries int) ([]byte, er
 		// Check for non-successful status code
 		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 			lastErr = errors.Errorf("attempt %d: non-successful status code: %d", attempt, resp.StatusCode)
-			
+
 			// If this is not the last attempt, wait before retrying
 			if attempt < maxRetries {
 				time.Sleep(backoff)
@@ -62,7 +62,7 @@ func FetchWithRetry(ctx context.Context, url string, maxRetries int) ([]byte, er
 		data, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			lastErr = errors.Wrapf(err, "attempt %d: failed to read response body", attempt)
-			
+
 			// If this is not the last attempt, wait before retrying
 			if attempt < maxRetries {
 				time.Sleep(backoff)
@@ -149,8 +149,8 @@ func PostJSON(ctx context.Context, url string, jsonData []byte) ([]byte, error) 
 		if readErr != nil {
 			errorBody = []byte("[unable to read error response body]")
 		}
-		
-		return nil, errors.Errorf("non-successful status code: %d, body: %s", 
+
+		return nil, errors.Errorf("non-successful status code: %d, body: %s",
 			resp.StatusCode, string(errorBody))
 	}
 

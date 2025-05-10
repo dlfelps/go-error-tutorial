@@ -6,21 +6,21 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/pkg/errors"
 	_ "github.com/mattn/go-sqlite3" // SQLite driver
+	"github.com/pkg/errors"
 )
 
 // Custom errors for database operations
 var (
-	ErrUserNotFound = errors.New("user not found")
+	ErrUserNotFound      = errors.New("user not found")
 	ErrDatabaseOperation = errors.New("database operation failed")
 )
 
 // User represents a user in the database
 type User struct {
-	ID       int
-	Username string
-	Email    string
+	ID        int
+	Username  string
+	Email     string
 	CreatedAt time.Time
 }
 

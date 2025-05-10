@@ -14,8 +14,8 @@ func SafeGo(log *logrus.Logger, fn func()) {
 			if r := recover(); r != nil {
 				stack := debug.Stack()
 				log.WithFields(logrus.Fields{
-					"panic":  r,
-					"stack":  string(stack),
+					"panic": r,
+					"stack": string(stack),
 				}).Error("Recovered from panic in goroutine")
 			}
 		}()
@@ -30,8 +30,8 @@ func RecoverMiddleware(log *logrus.Logger, next func()) {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
 			log.WithFields(logrus.Fields{
-				"panic":  r,
-				"stack":  string(stack),
+				"panic": r,
+				"stack": string(stack),
 			}).Error("Recovered from panic")
 		}
 	}()

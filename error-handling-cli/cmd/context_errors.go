@@ -120,7 +120,7 @@ func runContextErrorsTutorial() {
 
 	fmt.Println("Welcome to the interactive tutorial on context-based error handling in Go!")
 	fmt.Println()
-	
+
 	printSection("What is the Context Package?")
 	fmt.Println("The context package provides a way to carry deadlines, cancellation signals,")
 	fmt.Println("and request-scoped values across API boundaries and between processes.")
@@ -130,9 +130,9 @@ func runContextErrorsTutorial() {
 	fmt.Println("2. Cancellation of operations")
 	fmt.Println("3. Propagating cancellation to multiple goroutines")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Context Types")
 	fmt.Println("The context package provides several context types:")
 	color.Cyan("// The root of all contexts")
@@ -153,9 +153,9 @@ func runContextErrorsTutorial() {
 	color.Cyan("ctx, cancel := context.WithCancel(parentCtx)")
 	color.Cyan("defer cancel()")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Context Error Types")
 	fmt.Println("The context package defines two special error types:")
 	color.Cyan("// Returned when a context's deadline passes")
@@ -171,9 +171,9 @@ func runContextErrorsTutorial() {
 	color.Cyan("    // Handle cancellation")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Using Context for Cancellation")
 	fmt.Println("A typical pattern for making operations cancellable:")
 	color.Cyan("func doOperation(ctx context.Context) error {")
@@ -199,9 +199,9 @@ func runContextErrorsTutorial() {
 	color.Cyan("    }")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Demonstration: Timeout")
 	fmt.Println("Let's see a timeout in action. The following operation takes 2 seconds,")
 	fmt.Println("but we'll give it a 1 second timeout:")
@@ -209,9 +209,9 @@ func runContextErrorsTutorial() {
 	color.Yellow("Running operation with a 1 second timeout...")
 	simulateTimeoutOperation()
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Demonstration: Cancellation")
 	fmt.Println("Now let's see manual cancellation in action. We'll start an operation")
 	fmt.Println("and then cancel it after 500 milliseconds:")
@@ -219,9 +219,9 @@ func runContextErrorsTutorial() {
 	color.Yellow("Running operation with manual cancellation...")
 	simulateCancellationOperation()
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Practical Example: HTTP Request")
 	fmt.Println("A common use is making HTTP requests cancellable:")
 	color.Cyan("func fetchURL(ctx context.Context, url string) ([]byte, error) {")
@@ -246,9 +246,9 @@ func runContextErrorsTutorial() {
 	color.Cyan("    // ... implementation details ...")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Best Practices")
 	fmt.Println("1. Always pass a context as the first parameter to functions that may block")
 	fmt.Println("2. Always defer the cancel function to prevent resource leaks")
@@ -256,9 +256,9 @@ func runContextErrorsTutorial() {
 	fmt.Println("4. Don't store contexts in structs; pass them explicitly")
 	fmt.Println("5. Only use context.Background() at the highest level; otherwise pass down contexts")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Summary")
 	fmt.Println("Context-based error handling in Go provides:")
 	fmt.Println("- A standardized way to handle timeouts and cancellation")
@@ -269,7 +269,7 @@ func runContextErrorsTutorial() {
 	fmt.Println("This pattern is essential for writing robust, responsive services in Go,")
 	fmt.Println("especially when dealing with external resources or long-running operations.")
 	fmt.Println()
-	
+
 	color.Green("To continue learning, try the next command:")
 	color.Green("goerrors errgroup    # Learn about error groups for concurrent operations")
 	fmt.Println()

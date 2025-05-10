@@ -80,16 +80,16 @@ func runErrorWrappingTutorial() {
 
 	fmt.Println("Welcome to the interactive tutorial on error wrapping in Go!")
 	fmt.Println()
-	
+
 	printSection("What is Error Wrapping?")
 	fmt.Println("Error wrapping is a technique that allows you to:")
 	fmt.Println("1. Add context to errors as they propagate up the call stack")
 	fmt.Println("2. Preserve the original error information")
 	fmt.Println("3. Create a chain of errors showing what happened at each level")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Basic Error Wrapping")
 	fmt.Println("Starting with Go 1.13, you can wrap errors using fmt.Errorf() with the %w verb:")
 	color.Cyan("originalErr := errors.New(\"database connection failed\")")
@@ -97,9 +97,9 @@ func runErrorWrappingTutorial() {
 	fmt.Println()
 	fmt.Println("The wrapped error contains both the new context and the original error.")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Checking Wrapped Errors")
 	fmt.Println("You can check if an error in the chain is a specific error:")
 	color.Cyan("// Define a sentinel error")
@@ -110,9 +110,9 @@ func runErrorWrappingTutorial() {
 	color.Cyan("    // Handle not found case")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Extracting Wrapped Errors")
 	fmt.Println("You can also extract specific error types from the chain:")
 	color.Cyan("var dbErr *DatabaseError")
@@ -121,12 +121,12 @@ func runErrorWrappingTutorial() {
 	color.Cyan("    fmt.Printf(\"Database error code: %d\\n\", dbErr.Code)")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Practical Example")
 	fmt.Println("Let's look at a chain of function calls with error wrapping:")
-	
+
 	color.Cyan("func simulateErrorChain() error {")
 	color.Cyan("    err := levelThree()")
 	color.Cyan("    if err != nil {")
@@ -145,30 +145,30 @@ func runErrorWrappingTutorial() {
 	color.Cyan("")
 	color.Cyan("// ... and so on")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Demonstration")
 	fmt.Println("Let's see error wrapping in action:")
-	
+
 	// Generate an error chain
 	err := simulateErrorChain()
-	
+
 	// Print the wrapped error
 	color.Red("Wrapped error: %v\n", err)
-	
+
 	// Demonstrate errors.Is
 	originalErr := errors.New("level one encountered a critical error")
 	if errors.Is(err, originalErr) {
 		color.Green("✓ errors.Is() confirms this error chain contains our original error\n")
 	}
-	
+
 	fmt.Println()
 	color.Yellow("Notice how each layer adds context, while preserving the original error!")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Unwrapping Errors")
 	fmt.Println("You can manually unwrap errors using errors.Unwrap():")
 	color.Cyan("func printErrorChain(err error) {")
@@ -178,13 +178,13 @@ func runErrorWrappingTutorial() {
 	color.Cyan("    }")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	fmt.Println("Let's print our error chain:")
 	printErrorChain(err)
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Custom Unwrap Method")
 	fmt.Println("You can implement the Unwrap method on your custom error types:")
 	color.Cyan("type QueryError struct {")
@@ -200,9 +200,9 @@ func runErrorWrappingTutorial() {
 	color.Cyan("    return e.Err")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Best Practices")
 	fmt.Println("1. Add context when wrapping errors to clarify what operation failed")
 	fmt.Println("2. Use errors.Is() to check for specific errors in the chain")
@@ -210,9 +210,9 @@ func runErrorWrappingTutorial() {
 	fmt.Println("4. Implement the Unwrap() method on custom error types")
 	fmt.Println("5. Don't wrap errors unnecessarily if no context is being added")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Summary")
 	fmt.Println("Error wrapping in Go allows you to:")
 	fmt.Println("- Add context at each level of your call stack")
@@ -223,7 +223,7 @@ func runErrorWrappingTutorial() {
 	fmt.Println("This leads to more informative and useful error messages while")
 	fmt.Println("still allowing precise error checking in your code.")
 	fmt.Println()
-	
+
 	color.Green("To continue learning, try the next command:")
 	color.Green("goerrors panic    # Learn about panic handling and recovery")
 	fmt.Println()
@@ -236,7 +236,7 @@ func printErrorChain(err error) {
 		// Print the current error with indentation
 		spaces := strings.Repeat("  ", indent)
 		color.Cyan("%s→ %v", spaces, err)
-		
+
 		// Unwrap for the next iteration
 		err = errors.Unwrap(err)
 		indent++

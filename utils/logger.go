@@ -84,17 +84,17 @@ func ErrorWithContext(logger *logrus.Logger, err error, message string, fields l
 	if fields == nil {
 		fields = logrus.Fields{}
 	}
-	
+
 	// Extract stack trace if available from github.com/pkg/errors
 	type stackTracer interface {
 		StackTrace() errors.StackTrace
 	}
-	
+
 	var stackTrace string
 	if err, ok := err.(stackTracer); ok {
 		stackTrace = fmt.Sprintf("%+v", err.StackTrace())
 		fields["stack_trace"] = stackTrace
 	}
-	
+
 	logger.WithFields(fields).WithError(err).Error(message)
 }

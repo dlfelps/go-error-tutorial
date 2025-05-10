@@ -360,9 +360,9 @@ func demoDatabaseOperations(ctx context.Context, log *logrus.Logger, dbPath stri
 		log.WithError(err).Error("Failed to retrieve user")
 	} else {
 		log.WithFields(logrus.Fields{
-			"user_id":   retrievedUser.ID,
-			"username":  retrievedUser.Username,
-			"email":     retrievedUser.Email,
+			"user_id":  retrievedUser.ID,
+			"username": retrievedUser.Username,
+			"email":    retrievedUser.Email,
 		}).Info("User retrieved successfully")
 	}
 

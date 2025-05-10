@@ -31,9 +31,9 @@ func (e *ValidationError) Error() string {
 
 // NetworkError represents an error occurring during network operations
 type NetworkError struct {
-	URL      string
-	Op       string
-	Cause    error
+	URL       string
+	Op        string
+	Cause     error
 	Retriable bool
 }
 
@@ -58,9 +58,9 @@ func (e *NetworkError) IsRetriable() bool {
 // NewNetworkError creates a new NetworkError
 func NewNetworkError(url, op string, cause error, retriable bool) *NetworkError {
 	return &NetworkError{
-		URL:      url,
-		Op:       op,
-		Cause:    cause,
+		URL:       url,
+		Op:        op,
+		Cause:     cause,
 		Retriable: retriable,
 	}
 }

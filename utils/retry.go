@@ -8,11 +8,11 @@ import (
 
 // RetryOptions configures the retry behavior
 type RetryOptions struct {
-	MaxRetries    int           // Maximum number of retry attempts
-	BaseDelay     time.Duration // Base delay between retries
-	MaxDelay      time.Duration // Maximum delay between retries
-	Factor        float64       // Factor to increase the delay with each retry
-	Jitter        float64       // Randomness factor to add to the delay (0.0-1.0)
+	MaxRetries    int              // Maximum number of retry attempts
+	BaseDelay     time.Duration    // Base delay between retries
+	MaxDelay      time.Duration    // Maximum delay between retries
+	Factor        float64          // Factor to increase the delay with each retry
+	Jitter        float64          // Randomness factor to add to the delay (0.0-1.0)
 	RetryableFunc func(error) bool // Function to determine if an error is retryable
 }
 
@@ -34,7 +34,7 @@ func DefaultRetryOptions() RetryOptions {
 // Retry executes the given function with exponential backoff retry logic
 func Retry(ctx context.Context, fn func() error, opts RetryOptions) error {
 	var err error
-	
+
 	// Initialize random number generator for jitter
 	rand.Seed(time.Now().UnixNano())
 
@@ -45,7 +45,7 @@ func Retry(ctx context.Context, fn func() error, opts RetryOptions) error {
 	for attempt := 0; attempt <= opts.MaxRetries; attempt++ {
 		// Execute the function
 		err = fn()
-		
+
 		// If there was no error or the error is not retryable, return immediately
 		if err == nil || (opts.RetryableFunc != nil && !opts.RetryableFunc(err)) {
 			return err
@@ -61,14 +61,14 @@ func Retry(ctx context.Context, fn func() error, opts RetryOptions) error {
 		if opts.Jitter > 0 {
 			jitter = 1.0 + (rand.Float64()*2-1)*opts.Jitter // Random value between (1-jitter) and (1+jitter)
 		}
-		
+
 		nextDelay := time.Duration(float64(currentDelay) * opts.Factor * jitter)
-		
+
 		// Cap the delay at MaxDelay
 		if nextDelay > opts.MaxDelay {
 			nextDelay = opts.MaxDelay
 		}
-		
+
 		// Update the current delay for the next iteration
 		currentDelay = nextDelay
 
@@ -90,7 +90,7 @@ func Retry(ctx context.Context, fn func() error, opts RetryOptions) error {
 func RetryWithResult[T any](ctx context.Context, fn func() (T, error), opts RetryOptions) (T, error) {
 	var result T
 	var err error
-	
+
 	// Initialize random number generator for jitter
 	rand.Seed(time.Now().UnixNano())
 
@@ -101,7 +101,7 @@ func RetryWithResult[T any](ctx context.Context, fn func() (T, error), opts Retr
 	for attempt := 0; attempt <= opts.MaxRetries; attempt++ {
 		// Execute the function
 		result, err = fn()
-		
+
 		// If there was no error or the error is not retryable, return immediately
 		if err == nil || (opts.RetryableFunc != nil && !opts.RetryableFunc(err)) {
 			return result, err
@@ -117,14 +117,14 @@ func RetryWithResult[T any](ctx context.Context, fn func() (T, error), opts Retr
 		if opts.Jitter > 0 {
 			jitter = 1.0 + (rand.Float64()*2-1)*opts.Jitter // Random value between (1-jitter) and (1+jitter)
 		}
-		
+
 		nextDelay := time.Duration(float64(currentDelay) * opts.Factor * jitter)
-		
+
 		// Cap the delay at MaxDelay
 		if nextDelay > opts.MaxDelay {
 			nextDelay = opts.MaxDelay
 		}
-		
+
 		// Update the current delay for the next iteration
 		currentDelay = nextDelay
 

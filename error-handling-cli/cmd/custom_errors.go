@@ -125,7 +125,7 @@ func runCustomErrorsTutorial() {
 
 	fmt.Println("Welcome to the interactive tutorial on custom error types in Go!")
 	fmt.Println()
-	
+
 	printSection("Why Custom Error Types?")
 	fmt.Println("While simple string errors are often enough, custom error types provide:")
 	fmt.Println("1. Structured error data with fields")
@@ -133,9 +133,9 @@ func runCustomErrorsTutorial() {
 	fmt.Println("3. The ability to implement behavior on errors")
 	fmt.Println("4. Domain-specific error hierarchies")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Defining a Custom Error Type")
 	fmt.Println("A custom error type can be any type that implements the error interface:")
 	color.Cyan("type ValidationError struct {")
@@ -148,9 +148,9 @@ func runCustomErrorsTutorial() {
 	color.Cyan("    return fmt.Sprintf(\"validation error for field '%s': %s\", e.Field, e.Message)")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Using Custom Error Types")
 	fmt.Println("When a function returns an error, you can check for specific error types:")
 	color.Cyan("err := validateUser(user)")
@@ -163,9 +163,9 @@ func runCustomErrorsTutorial() {
 	color.Cyan("    }")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Practical Example")
 	fmt.Println("Let's look at a user validation function:")
 	color.Cyan("func validateUser(user User) error {")
@@ -188,9 +188,9 @@ func runCustomErrorsTutorial() {
 	color.Cyan("    return nil  // No error if validation passes")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Error Type Hierarchies")
 	fmt.Println("You can create hierarchies of error types:")
 	color.Cyan("type AppError struct {")
@@ -207,9 +207,9 @@ func runCustomErrorsTutorial() {
 	color.Cyan("    return e.Err")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Error Sentinel Values")
 	fmt.Println("Go also supports predefined error values (sentinel errors):")
 	color.Cyan("var (")
@@ -227,24 +227,24 @@ func runCustomErrorsTutorial() {
 	color.Cyan("    // Handle not found case")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Try It Yourself")
 	fmt.Println("You can try the validation with:")
 	color.Green("goerrors custom invalid-email    # Should fail email validation")
 	color.Green("goerrors custom user@example.com  # Should pass email validation but fail age validation")
 	fmt.Println()
-	
+
 	printSection("Best Practices")
 	fmt.Println("1. Use custom error types for domain-specific errors")
 	fmt.Println("2. Include enough context in errors to be helpful")
 	fmt.Println("3. Consider implementing the Unwrap() method for error chains")
 	fmt.Println("4. Use error sentinel values for expected errors that don't need context")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Summary")
 	fmt.Println("Custom error types in Go allow you to:")
 	fmt.Println("- Include structured data in your errors")
@@ -254,7 +254,7 @@ func runCustomErrorsTutorial() {
 	fmt.Println()
 	fmt.Println("This approach provides much more context and structure than simple string errors.")
 	fmt.Println()
-	
+
 	color.Green("To continue learning, try the next command:")
 	color.Green("goerrors wrap    # Learn about error wrapping")
 	fmt.Println()

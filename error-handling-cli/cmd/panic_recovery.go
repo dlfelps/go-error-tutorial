@@ -94,7 +94,7 @@ func runPanicRecoveryTutorial() {
 
 	fmt.Println("Welcome to the interactive tutorial on panic handling and recovery in Go!")
 	fmt.Println()
-	
+
 	printSection("What are Panics?")
 	fmt.Println("In Go, a panic is for exceptional situations where normal error handling isn't appropriate:")
 	fmt.Println("1. Unrecoverable programming errors (nil pointer dereference, index out of range)")
@@ -103,9 +103,9 @@ func runPanicRecoveryTutorial() {
 	fmt.Println()
 	fmt.Println("Panics are NOT for normal error conditions. For those, use regular error handling.")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("How Panics Work")
 	fmt.Println("When a panic occurs:")
 	fmt.Println("1. Normal execution stops")
@@ -113,9 +113,9 @@ func runPanicRecoveryTutorial() {
 	fmt.Println("3. The panic propagates up the call stack")
 	fmt.Println("4. If not recovered, the program terminates with a stack trace")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Causing a Panic")
 	fmt.Println("You can explicitly cause a panic:")
 	color.Cyan("func dangerousOperation() {")
@@ -130,9 +130,9 @@ func runPanicRecoveryTutorial() {
 	color.Cyan("arr := []int{1, 2, 3}")
 	color.Cyan("value := arr[10]  // This causes a panic: index out of range")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Recovering from Panics")
 	fmt.Println("The recover() function allows you to catch and handle panics:")
 	color.Cyan("func doSomething() (err error) {")
@@ -148,9 +148,9 @@ func runPanicRecoveryTutorial() {
 	color.Cyan("    return nil")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Practical Example: Safe Division")
 	fmt.Println("Let's implement a division function that converts panics to errors:")
 	color.Cyan("func safeDivide(a, b int) (result int, err error) {")
@@ -170,12 +170,12 @@ func runPanicRecoveryTutorial() {
 	color.Cyan("    return a / b, nil")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Demonstration")
 	fmt.Println("Let's see our safeDivide function in action:")
-	
+
 	// Safe case
 	result, err := safeDivide(10, 2)
 	if err != nil {
@@ -183,7 +183,7 @@ func runPanicRecoveryTutorial() {
 	} else {
 		color.Green("Result of 10 ÷ 2 = %d\n", result)
 	}
-	
+
 	// Panic case
 	result, err = safeDivide(10, 0)
 	if err != nil {
@@ -191,13 +191,13 @@ func runPanicRecoveryTutorial() {
 	} else {
 		color.Green("Result = %d\n", result)
 	}
-	
+
 	fmt.Println()
 	color.Yellow("Notice how the panic was converted to a regular error that we can handle!")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("How Panics Propagate")
 	fmt.Println("Panics propagate up the call stack until recovered:")
 	color.Cyan("func main() {")
@@ -224,18 +224,18 @@ func runPanicRecoveryTutorial() {
 	color.Cyan("    panic(\"something went wrong\")")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Demonstration: Nested Panic")
 	fmt.Println("Let's see how a panic propagates through nested function calls:")
 	fmt.Println()
 	color.Yellow("Starting demonstration - watch the call stack unwind...")
 	nestedPanicExample()
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Stack Traces")
 	fmt.Println("You can capture stack traces when recovering from panics:")
 	color.Cyan("defer func() {")
@@ -245,9 +245,9 @@ func runPanicRecoveryTutorial() {
 	color.Cyan("    }")
 	color.Cyan("}()")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Best Practices")
 	fmt.Println("1. Use panics only for truly exceptional conditions")
 	fmt.Println("2. For expected errors, use error returns instead of panics")
@@ -255,9 +255,9 @@ func runPanicRecoveryTutorial() {
 	fmt.Println("4. When recovering, log or return enough information to diagnose the issue")
 	fmt.Println("5. Consider converting panics to errors at API boundaries")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("HTTP Handler Example")
 	fmt.Println("A common use of recover is in HTTP handlers:")
 	color.Cyan("func safeHandler(handler http.HandlerFunc) http.HandlerFunc {")
@@ -276,9 +276,9 @@ func runPanicRecoveryTutorial() {
 	color.Cyan("    }")
 	color.Cyan("}")
 	fmt.Println()
-	
+
 	pressEnterToContinue()
-	
+
 	printSection("Summary")
 	fmt.Println("In Go, panic and recover provide a mechanism for handling exceptional cases:")
 	fmt.Println("- Panics are for unrecoverable errors and programmer mistakes")
@@ -289,7 +289,7 @@ func runPanicRecoveryTutorial() {
 	fmt.Println("Remember: panic should be rare in well-written Go code. Use error returns")
 	fmt.Println("for normal error handling, and panics only for truly exceptional conditions.")
 	fmt.Println()
-	
+
 	color.Green("To continue learning, try the next command:")
 	color.Green("goerrors context    # Learn about context-based cancellation and error handling")
 	fmt.Println()
