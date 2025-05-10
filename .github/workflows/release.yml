@@ -1,4 +1,4 @@
-name: Build and Release
+name: Build Binaries
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - 'v*'
 
 jobs:
-  release:
-    name: Build and Create Release
+  build_binaries:
+    name: Build Binaries
     runs-on: ubuntu-latest
     
     steps:
@@ -17,74 +17,24 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: '1.20'
+        go-version: '1.19'
         
     - name: Install dependencies
       run: |
         cd error-demo
         go mod download
         
-    - name: Build for multiple platforms
+    - name: Build for Linux
       run: |
-        mkdir -p builds
-        
-        # Build for Linux
         cd error-demo
-        GOOS=linux GOARCH=amd64 go build -o ../builds/error-demo-linux-amd64
+        GOOS=linux GOARCH=amd64 go build -o error-demo-linux
         
-        # Build for macOS
-        GOOS=darwin GOARCH=amd64 go build -o ../builds/error-demo-macos-amd64
-        
-        # Build for Windows
-        GOOS=windows GOARCH=amd64 go build -o ../builds/error-demo-windows-amd64.exe
-        
-        cd ..
-        
-    - name: Create ZIP archives for each binary
+    - name: Build for macOS
       run: |
-        cd builds
-        zip -j error-demo-linux-amd64.zip error-demo-linux-amd64
-        zip -j error-demo-macos-amd64.zip error-demo-macos-amd64
-        zip -j error-demo-windows-amd64.zip error-demo-windows-amd64.exe
-        cd ..
+        cd error-demo
+        GOOS=darwin GOARCH=amd64 go build -o error-demo-macos
         
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-        
-    - name: Upload Linux Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./builds/error-demo-linux-amd64.zip
-        asset_name: error-demo-linux-amd64.zip
-        asset_content_type: application/zip
-        
-    - name: Upload macOS Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./builds/error-demo-macos-amd64.zip
-        asset_name: error-demo-macos-amd64.zip
-        asset_content_type: application/zip
-        
-    - name: Upload Windows Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./builds/error-demo-windows-amd64.zip
-        asset_name: error-demo-windows-amd64.zip
-        asset_content_type: application/zip
+    - name: Build for Windows
+      run: |
+        cd error-demo
+        GOOS=windows GOARCH=amd64 go build -o error-demo-windows.exe

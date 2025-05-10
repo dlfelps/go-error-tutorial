@@ -97,13 +97,13 @@ Some key best practices demonstrated include:
 This project uses GitHub Actions to:
 
 1. **Automatically build and test the code** on every push to the main branch
-2. **Create releases with compiled binaries** when a tag is pushed
+2. **Build binaries for multiple platforms** when a tag is pushed
    - Binaries are built for Linux, macOS, and Windows
 
 ### Workflow Files
 
 - `.github/workflows/go.yml` - Builds and tests the code on push
-- `.github/workflows/release.yml` - Creates releases with compiled binaries when a tag is pushed
+- `.github/workflows/release.yml` - Builds binaries for multiple platforms when a tag is pushed
 
 ## License
 
