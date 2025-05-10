@@ -1,0 +1,40 @@
+modules = ["golang"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["go", "sqlite"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "GoErrorHandlingDemo"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "golang-error-demo"
+
+[[workflows.workflow]]
+name = "GoErrorHandlingDemo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run main.go"
+
+[[workflows.workflow]]
+name = "golang-error-demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "go run main.go"
+
+[deployment]
+run = ["sh", "-c", "go run main.go"]
