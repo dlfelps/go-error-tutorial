@@ -1,5 +1,7 @@
 # Go Error Handling Patterns Demo
 
+[![Go Build and Test](https://github.com/username/repo-name/actions/workflows/go.yml/badge.svg)](https://github.com/username/repo-name/actions/workflows/go.yml)
+
 This repository provides a comprehensive demonstration of error handling patterns and best practices in Go.
 
 ## Overview
@@ -89,6 +91,19 @@ Some key best practices demonstrated include:
 4. Use sentinel errors for expected error conditions
 5. Make operations cancellable with contexts
 6. Use panic only for exceptional situations
+
+## CI/CD
+
+This project uses GitHub Actions to:
+
+1. **Automatically build and test the code** on every push to the main branch
+2. **Create releases with compiled binaries** when a tag is pushed
+   - Binaries are built for Linux, macOS, and Windows
+
+### Workflow Files
+
+- `.github/workflows/go.yml` - Builds and tests the code on push
+- `.github/workflows/release.yml` - Creates releases with compiled binaries when a tag is pushed
 
 ## License
 
